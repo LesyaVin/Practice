@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<!--
+	Этот файл обрабатывается express.js, когда rurl /chat/123456 посещается в браузере.
+	Он включает jQuery, socket.io.js (автоматически обслуживается библиотекой socket.io),
+	и еще несколько файлов JavaScript, которые вам стоит проверить.
+-->
+<html>
+<head>
+	<title>Приватная чат-комната</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link type="text/css" rel="stylesheet" href="../css/stylesheet.css" />
+	<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/bootstrap.icon-large.min.css" rel="stylesheet">
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans Condensed:300italic,300,700" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+	<section class="section">
+
+		<!-- Эти элементы отображаются в виде белых информационных карточек в центре экрана. -->
+		<div class="connected">
+			<img src="../img/unnamed.jpg" id="creatorImage" />
+			<div class="infoConnected">
+				<h2>Кто ты?</h2>
+				<br/>
+				<form class="loginForm">
+					<input type="text" id="yourName" placeholder="Имя" /><br/>
+					<input type="text" id="yourEmail" placeholder="email" /><br/>
+					<input type="submit" id="yourEnter" value="Войти" />
+				</form>
+			</div>
+		</div>
+
+		<div class="personinside">
+			<img src="../img/unnamed.jpg" id="ownerImage" />
+			<div class="infoInside">
+				<h2>Чат с <span class="nickname-chat"></span></h2>
+				<br/>
+				<form class="loginForm">
+					<input type="text" id="hisName" placeholder="Имя" /><br/>
+					<input type="text" id="hisEmail" placeholder="email" /><br/>
+					<input type="submit" id="hisEnter" value="Чат" />
+				</form>
+			</div>
+		</div>
+		<div class="invite-textfield">
+			<h2>К сожалению, в этом чате нет других людей!</h2>
+			<h5>Пригласите друга, отправив ему этот URL</h5>
+			<div class="link">
+				<a title="Invite a friend" href="" id="link"></a>
+			</div>
+		</div>
+
+		<div class="left">
+			<img src="../img/unnamed.jpg" id="leftImage" />
+			<div class="info">
+				<h2><span class="nickname-left"></span> покинул этот чат.</h2>
+				<h5>Пригласите кого-нибудь еще, отправив ему эту страницу.</h5>
+			</div>
+		</div>
+
+		<div class="toomanypeople">
+			<h2>К сожалению, вы не можете присоединиться к этому чату!</h2>
+			<h5>В нем уже два человека. Хотели бы вы создать <a title="New Room" href="/create" id="room">новую комнату</a>?</h5>
+		</div>
+
+		<div class="nomessages">
+			<img src="../img/unnamed.jpg" id="noMessagesImage" />
+			<div class="info">
+				<h2>Вы болтаете с <span class="nickname-chat"></span>.</h2>
+				<h5>Отправьте сообщение из формы ниже!</h5>
+			</div>
+		</div>
+
+		<div class="chatscreen">
+			<ul class="chats">
+				<!-- Сообщения чата будут отправляться сюда -->
+			</ul>
+		</div>
+	</section>
+
+	<footer>
+		<form id="chatform">
+			<textarea id="message" placeholder="Напиши что-нибудь.."></textarea>
+			<input type="submit" id="submit" value="Отправить"/>
+		</form>
+	</footer>
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+	<script src="../js/moment.min.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="../js/chat.js"></script>
+</body>
+</html>
